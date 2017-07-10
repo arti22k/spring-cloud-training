@@ -1,2 +1,7 @@
+server:
+  ssl:
+    key-store: classpath:keystore.jks
+    key-store-password: password
+    key-password: password
 zuul:
   prefix: /api-v1
