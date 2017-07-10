@@ -15,6 +15,7 @@
         <module>organization</module>
         <module>discovery</module>
         <module>configuration</module>
+        <module>gateway</module>
     </modules>
 
     <properties>
