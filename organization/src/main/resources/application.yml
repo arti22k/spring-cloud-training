@@ -4,10 +4,8 @@ spring:
     url: jdbc:postgresql://localhost/training
     username: lukaszandrzejewski
     #password: admin
-
   jpa:
     hibernate:
       ddl-auto: update
   jackson:
     default-property-inclusion: non_null
-
