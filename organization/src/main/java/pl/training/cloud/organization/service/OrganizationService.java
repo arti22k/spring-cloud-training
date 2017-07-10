@@ -17,7 +17,7 @@ public class OrganizationService {
         this.departmentRepository = departmentRepository;
     }
 
-    public Department add(Department department) {
+    public Department addDepartment(Department department) {
         departmentRepository.saveAndFlush(department);
         return department;
     }
@@ -31,12 +31,12 @@ public class OrganizationService {
         return departmentRepository.findAll();
     }
 
-    public void update(Department department) {
+    public void updateDepartment(Department department) {
         getDepartment(department.getId());
         departmentRepository.saveAndFlush(department);
     }
 
-    public void delete(Long departmentId) {
+    public void deleteDepartment(Long departmentId) {
         Department department = getDepartment(departmentId);
         departmentRepository.delete(department);
     }
