@@ -3,6 +3,3 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost/training
     username: lukaszandrzejewski
-  cloud:
-    config:
-      uri: http://localhost:8001
