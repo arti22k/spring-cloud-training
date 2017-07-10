@@ -20,7 +20,7 @@ import java.util.Locale;
 import static org.springframework.http.ResponseEntity.created;
 import static org.springframework.http.ResponseEntity.noContent;
 
-@RequestMapping("organization/departments")
+@RequestMapping("departments")
 @RestController
 public class OrganizationController {
 
