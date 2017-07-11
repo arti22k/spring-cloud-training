@@ -51,11 +51,11 @@ public class UsersController {
 //        if (departmentId.isPresent()) {
 //            user.setDepartmentId(departmentId.get());
 //        }
-        DepartmentsListDto departmentsListDto = organizationServiceFeignClient.getDepartments(userDto.getDepartment());
-        List<DepartmentDto> departmentDtos = departmentsListDto.getDepartments();
-        if (!departmentDtos.isEmpty()) {
-            user.setDepartmentId(departmentDtos.get(0).getId());
-        }
+//        DepartmentsListDto departmentsListDto = organizationServiceFeignClient.getDepartments(userDto.getDepartment());
+//        List<DepartmentDto> departmentDtos = departmentsListDto.getDepartments();
+//        if (!departmentDtos.isEmpty()) {
+//            user.setDepartmentId(departmentDtos.get(0).getId());
+//        }
 
         usersService.addUser(user);
         URI uri = uriBuilder.requestUriWithId(user.getId());
