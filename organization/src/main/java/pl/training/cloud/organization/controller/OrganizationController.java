@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.training.cloud.common.Mapper;
 import pl.training.cloud.common.controller.UriBuilder;
-import pl.training.cloud.common.dto.IdDto;
 import pl.training.cloud.organization.dto.DepartmentDto;
 import pl.training.cloud.organization.dto.DepartmentsListDto;
 import pl.training.cloud.organization.entity.Department;
