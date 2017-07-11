@@ -3,4 +3,4 @@ spring:
     name: organization
   cloud:
     config:
-      uri: http://localhost:8001
+      uri: http://localhost:8002
