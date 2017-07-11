@@ -6,7 +6,10 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.web.client.RestTemplate;
+import pl.training.cloud.users.repository.AuthoritiesRepository;
 import pl.training.cloud.users.repository.UsersRepository;
 import pl.training.cloud.users.service.OrganizationServiceClient;
 import pl.training.cloud.users.service.UsersService;
@@ -16,8 +19,8 @@ import pl.training.cloud.users.service.UsersService;
 public class Beans {
 
     @Bean
-    public UsersService usersService(UsersRepository usersRepository) {
-        return new UsersService(usersRepository);
+    public UsersService usersService(UsersRepository usersRepository, AuthoritiesRepository authoritiesRepository, PasswordEncoder passwordEncoder) {
+        return new UsersService(usersRepository, authoritiesRepository, passwordEncoder);
     }
 
     /*
@@ -38,6 +41,11 @@ public class Beans {
     @Bean
     public OrganizationServiceClient organizationService(RestTemplate restTemplate) {
         return new OrganizationServiceClient(restTemplate);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new StandardPasswordEncoder();
     }
 
 }
