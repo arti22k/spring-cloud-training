@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import pl.training.cloud.common.feign.OAuth2FeignRequestInterceptor;
 
 @Configuration
 @ConditionalOnClass(Feign.class)
