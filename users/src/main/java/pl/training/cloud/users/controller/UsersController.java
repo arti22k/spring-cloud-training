@@ -53,7 +53,7 @@ public class UsersController {
 //        }
         DepartmentsListDto departmentsListDto = organizationServiceFeignClient.getDepartments(userDto.getDepartment());
         List<DepartmentDto> departmentDtos = departmentsListDto.getDepartments();
-        if (departmentDtos != null && !departmentDtos.isEmpty()) {
+        if (!departmentDtos.isEmpty()) {
             user.setDepartmentId(departmentDtos.get(0).getId());
         }
 
