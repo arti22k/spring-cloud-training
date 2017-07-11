@@ -12,10 +12,12 @@ import pl.training.cloud.users.dto.UserDto;
 import pl.training.cloud.users.dto.UsersPageDto;
 import pl.training.cloud.users.entity.User;
 import pl.training.cloud.users.repository.ResultPage;
+import pl.training.cloud.users.service.OrganizationServiceClient;
 import pl.training.cloud.users.service.UsersService;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.created;
 
@@ -26,18 +28,24 @@ public class UsersController {
 
     private Mapper mapper;
     private UsersService usersService;
+    private OrganizationServiceClient organizationServiceClient;
     private UriBuilder uriBuilder = new UriBuilder();
 
     @Autowired
-    public UsersController(Mapper mapper, UsersService usersService) {
+    public UsersController(Mapper mapper, UsersService usersService, OrganizationServiceClient organizationServiceClient) {
         this.mapper = mapper;
         this.usersService = usersService;
+        this.organizationServiceClient = organizationServiceClient;
     }
 
     @ApiOperation(value = "Create new user")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity createUser(@ApiParam(name = "user") @RequestBody UserDto userDto) {
         User user = mapper.map(userDto, User.class);
+        Optional<Long> departmentId = organizationServiceClient.getDepartmentId(userDto.getDepartment());
+        if (departmentId.isPresent()) {
+            user.setDepartmentId(departmentId.get());
+        }
         usersService.addUser(user);
         URI uri = uriBuilder.requestUriWithId(user.getId());
         return created(uri).build();

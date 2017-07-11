@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.training.cloud.common.Mapper;
 import pl.training.cloud.common.controller.UriBuilder;
+import pl.training.cloud.common.dto.IdDto;
 import pl.training.cloud.organization.dto.DepartmentDto;
 import pl.training.cloud.organization.dto.DepartmentsListDto;
 import pl.training.cloud.organization.entity.Department;
@@ -52,8 +53,9 @@ public class OrganizationController {
 
     @ApiOperation(value = "Get all departments", response = DepartmentDto.class)
     @RequestMapping(method = RequestMethod.GET)
-    public DepartmentsListDto getDepartments() {
-        List<Department> departments = organizationService.getDepartments();
+    public DepartmentsListDto getDepartments(@RequestParam(name = "name", required = false) String name) {
+        List<Department> departments = name == null ? organizationService.getDepartments()
+                : organizationService.getDepartmentsByName(name);
         return new DepartmentsListDto(mapper.map(departments, DepartmentDto.class));
     }
 

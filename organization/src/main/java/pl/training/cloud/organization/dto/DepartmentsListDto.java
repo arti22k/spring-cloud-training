@@ -10,13 +10,13 @@ import java.util.List;
 @Data
 public class DepartmentsListDto {
 
+    private List<DepartmentDto> departments;
+
     public DepartmentsListDto() {
     }
 
     public DepartmentsListDto(List<DepartmentDto> departments) {
         this.departments = departments;
     }
-
-    private List<DepartmentDto> departments = new ArrayList<>();
 
 }

@@ -27,6 +27,10 @@ public class OrganizationService {
                 .orElseThrow(DepartmentNotFoundException::new);
     }
 
+    public List<Department> getDepartmentsByName(String name) {
+        return departmentRepository.getByName(name);
+    }
+
     public List<Department> getDepartments() {
         return departmentRepository.findAll();
     }

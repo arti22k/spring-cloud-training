@@ -6,6 +6,8 @@ import pl.training.cloud.users.entity.User;
 import pl.training.cloud.users.repository.ResultPage;
 import pl.training.cloud.users.repository.UsersRepository;
 
+import java.util.Optional;
+
 public class UsersService {
 
     private UsersRepository usersRepository;

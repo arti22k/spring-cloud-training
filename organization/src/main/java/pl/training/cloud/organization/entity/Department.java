@@ -12,6 +12,7 @@ public class Department {
     @GeneratedValue
     @Id
     private Long id;
+    @Column(unique = true)
     private String name;
 
 }
