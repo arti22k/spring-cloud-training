@@ -1,13 +1,8 @@
 server:
-  port: 8081
+  port: 8011
 spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost/training
-    username: lukaszandrzejewski
-    #password: admin
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
   jackson:
     default-property-inclusion: non_null
