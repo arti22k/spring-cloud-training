@@ -1,5 +1,5 @@
 server:
-  port: 8011
+  port: 8010
 spring:
   jpa:
     hibernate:
@@ -11,4 +11,4 @@ eureka:
     prefer-ip-address: true
   client:
     service-url:
-      defaultZone: http://localhost:8010/eureka/
+      defaultZone: http://localhost:8000/eureka/
