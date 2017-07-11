@@ -3,6 +3,10 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost/training
     username: lukaszandrzejewski
+security:
+  oauth2:
+    resource:
+      filter-order: 3
 logging:
   level:
     org.springframework.security: DEBUG

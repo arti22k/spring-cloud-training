@@ -5,3 +5,4 @@ server:
     key-password: password
 zuul:
   prefix: /api-v1
+  sensitive-headers: Cookie, Set-Cookie

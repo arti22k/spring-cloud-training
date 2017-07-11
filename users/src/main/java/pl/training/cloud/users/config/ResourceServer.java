@@ -1,4 +1,4 @@
-package pl.training.cloud.organization.config;
+package pl.training.cloud.users.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

@@ -46,9 +46,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, USERS_URI).permitAll()
-                .antMatchers(GLOBAL_PUBLIC_URIS).permitAll()
-                .antMatchers(ALL_URIS).hasRole(Role.ADMIN);
+                .antMatchers(ALL_URIS).permitAll();
     }
 
     @Override
