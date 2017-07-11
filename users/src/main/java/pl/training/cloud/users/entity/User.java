@@ -21,6 +21,6 @@ public class User {
     private String lastName;
     private String email;
     private boolean active;
-    private String department;
+    private Long departmentId;
 
 }
