@@ -1,4 +1,20 @@
-logging:
-  level:
-    org.springframework.security: DEBUG
-    org.springframework.web: DEBUG
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  jackson:
+    default-property-inclusion: non_null
+
+---
+spring:
+  profiles: development
+server:
+  port: 8010
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+signing:
+  key: "345345fsdfsf5345"

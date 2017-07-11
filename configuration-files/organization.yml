@@ -1,16 +1,19 @@
-server:
-  port: 8010
 spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.0.16/organizations
+    username: admin
+    password: "{cipher}604181529114461d8d4412be8fbaea569e14e0aa885bbb2a1755e821dfca5b7f"
   jpa:
     hibernate:
       ddl-auto: update
-  jackson:
-    default-property-inclusion: non_null
 eureka:
   instance:
-    prefer-ip-address: true
+    preferIpAddress: true
   client:
-    service-url:
-      defaultZone: http://localhost:8001/eureka/
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://192.168.0.12:8080/eureka/
 signing:
   key: "345345fsdfsf5345"

@@ -6,3 +6,17 @@ logging:
   level:
     org.springframework.security: DEBUG
     org.springframework.web: DEBUG
+
+---
+spring:
+  profiles: development
+server:
+  port: 8011
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+signing:
+  key: "345345fsdfsf5345"

@@ -6,3 +6,15 @@ server:
 zuul:
   prefix: /api-v1
   sensitive-headers: Cookie, Set-Cookie
+
+---
+spring:
+  profiles: development
+server:
+  port: 8000
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/

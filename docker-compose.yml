@@ -1,0 +1,55 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitbus
+      - RABBITMQ_DEFAULT_PASS=TbFpVQzneY2j
+    networks:
+      cloud:
+        ipv4_address: 192.168.0.14
+
+  configuration:
+    image: cloud/configuration:1.0-SNAPSHOT
+    restart: always
+    environment:
+      - ENCRYPT_KEY=hHekxn3q1uroad2a
+      - RABBITMQ_HOST=192.168.0.14
+      - RABBITMQ_USERNAME=rabbitbus
+      - RABBITMQ_PASSWORD=TbFpVQzneY2j
+      - ENCRYPT_KEY=qwertyuiopas
+    networks:
+      cloud:
+        ipv4_address: 192.168.0.13
+
+  discovery:
+    image: cloud/discovery:1.0-SNAPSHOT
+    restart: always
+    ports:
+      - "8012:8080"
+    environment:
+      - ZONE_URI=http://192.168.0.12:8080/eureka/
+    networks:
+      cloud:
+        ipv4_address: 192.168.0.12
+
+  gateway:
+    image: cloud/gateway:1.0-SNAPSHOT
+    restart: always
+    ports:
+      - "8010:8080"
+    environment:
+      - ZONE_URI=http://192.168.0.12:8080/eureka/
+    networks:
+      cloud:
+        ipv4_address: 192.168.0.10
+
+
+
+networks:
+  cloud:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 192.168.0.0/24

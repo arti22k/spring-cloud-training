@@ -1,5 +1,3 @@
-server:
-  port: 8002
 spring:
   cloud:
     config:
@@ -7,3 +5,9 @@ spring:
         git:
           uri: https://github.com/landrzejewski/spring-cloud-training
           search-paths: configuration-files
+
+---
+spring:
+  profiles: development
+server:
+  port: 8002
