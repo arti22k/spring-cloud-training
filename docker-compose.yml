@@ -73,6 +73,31 @@ services:
       cloud:
         ipv4_address: 192.168.0.15
 
+  organization_database:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=organization
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - PGDATA=/var/lib/postgresql/data/application
+    volumes:
+      - ./data/organization:/var/lib/postgresql/data/application
+    networks:
+      cloud:
+        ipv4_address: 192.168.0.18
+
+  organization:
+    image: cloud/users:1.0-SNAPSHOT
+    restart: always
+    environment:
+      - ZONE_URI=http://192.168.0.12:8080/eureka/
+      - CONFIG_URI=http://192.168.0.13:8080
+      - ENCRYPT_KEY=qwertyuiopas
+    networks:
+      cloud:
+        ipv4_address: 192.168.0.17
+
 networks:
   cloud:
     driver: bridge
