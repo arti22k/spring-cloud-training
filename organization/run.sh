@@ -15,7 +15,7 @@ echo ">>>>>>>>>>>> Config server has started"
 echo "*****************************************************"
 echo "Waiting for the Database server to start on port 5432"
 echo "*****************************************************"
-while ! `nc -z users_database 5432`; do sleep 3; done
+while ! `nc -z organization_database 5432`; do sleep 3; done
 echo ">>>>>>>>>>>> Database Server has started"
 
-java -jar -Dspring.cloud.config.uri=$CONFIG_URI /usr/local/service/users.jar
+java -jar -Dspring.cloud.config.uri=$CONFIG_URI /usr/local/service/organization.jar

@@ -88,7 +88,7 @@ services:
         ipv4_address: 192.168.0.18
 
   organization:
-    image: cloud/users:1.0-SNAPSHOT
+    image: cloud/organization:1.0-SNAPSHOT
     restart: always
     environment:
       - ZONE_URI=http://192.168.0.12:8080/eureka/
