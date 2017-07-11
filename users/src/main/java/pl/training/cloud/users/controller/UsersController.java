@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.training.cloud.common.Mapper;
 import pl.training.cloud.common.controller.UriBuilder;
+import pl.training.cloud.users.dto.DepartmentDto;
+import pl.training.cloud.users.dto.DepartmentsListDto;
 import pl.training.cloud.users.dto.UserDto;
 import pl.training.cloud.users.dto.UsersPageDto;
 import pl.training.cloud.users.entity.User;
@@ -44,13 +46,17 @@ public class UsersController {
     @ApiOperation(value = "Create new user")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity createUser(@ApiParam(name = "user") @RequestBody UserDto userDto) {
-        System.out.println(organizationServiceFeignClient.getDepartments(userDto.getDepartment()));
-
         User user = mapper.map(userDto, User.class);
-        Optional<Long> departmentId = organizationServiceClient.getDepartmentId(userDto.getDepartment());
-        if (departmentId.isPresent()) {
-            user.setDepartmentId(departmentId.get());
+//        Optional<Long> departmentId = organizationServiceClient.getDepartmentId(userDto.getDepartment());
+//        if (departmentId.isPresent()) {
+//            user.setDepartmentId(departmentId.get());
+//        }
+        DepartmentsListDto departmentsListDto = organizationServiceFeignClient.getDepartments(userDto.getDepartment());
+        List<DepartmentDto> departmentDtos = departmentsListDto.getDepartments();
+        if (departmentDtos != null && !departmentDtos.isEmpty()) {
+            user.setDepartmentId(departmentDtos.get(0).getId());
         }
+
         usersService.addUser(user);
         URI uri = uriBuilder.requestUriWithId(user.getId());
         return created(uri).build();
