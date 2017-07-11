@@ -13,6 +13,7 @@ import pl.training.cloud.users.dto.UsersPageDto;
 import pl.training.cloud.users.entity.User;
 import pl.training.cloud.users.repository.ResultPage;
 import pl.training.cloud.users.service.OrganizationServiceClient;
+import pl.training.cloud.users.service.OrganizationServiceFeignClient;
 import pl.training.cloud.users.service.UsersService;
 
 import java.net.URI;
@@ -29,18 +30,22 @@ public class UsersController {
     private Mapper mapper;
     private UsersService usersService;
     private OrganizationServiceClient organizationServiceClient;
+    private OrganizationServiceFeignClient organizationServiceFeignClient;
     private UriBuilder uriBuilder = new UriBuilder();
 
     @Autowired
-    public UsersController(Mapper mapper, UsersService usersService, OrganizationServiceClient organizationServiceClient) {
+    public UsersController(Mapper mapper, UsersService usersService, OrganizationServiceClient organizationServiceClient, OrganizationServiceFeignClient organizationServiceFeignClient) {
         this.mapper = mapper;
         this.usersService = usersService;
         this.organizationServiceClient = organizationServiceClient;
+        this.organizationServiceFeignClient = organizationServiceFeignClient;
     }
 
     @ApiOperation(value = "Create new user")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity createUser(@ApiParam(name = "user") @RequestBody UserDto userDto) {
+        System.out.println(organizationServiceFeignClient.getDepartments(userDto.getDepartment()));
+
         User user = mapper.map(userDto, User.class);
         Optional<Long> departmentId = organizationServiceClient.getDepartmentId(userDto.getDepartment());
         if (departmentId.isPresent()) {

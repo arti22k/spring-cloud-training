@@ -1,11 +1,11 @@
-package pl.training.cloud.common.dto;
+package pl.training.cloud.users.dto;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
-@ApiModel("id")
+@ApiModel("department")
 @Data
-public class IdDto {
+public class DepartmentDto {
 
     private Long id;
 
