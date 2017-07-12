@@ -14,7 +14,6 @@ services:
     image: cloud/configuration:1.0-SNAPSHOT
     restart: always
     environment:
-      - ENCRYPT_KEY=hHekxn3q1uroad2a
       - RABBITMQ_HOST=192.168.0.14
       - RABBITMQ_USERNAME=rabbitbus
       - RABBITMQ_PASSWORD=TbFpVQzneY2j
@@ -97,6 +96,17 @@ services:
     networks:
       cloud:
         ipv4_address: 192.168.0.17
+
+  organization2:
+    image: cloud/organization:1.0-SNAPSHOT
+    restart: always
+    environment:
+      - ZONE_URI=http://192.168.0.12:8080/eureka/
+      - CONFIG_URI=http://192.168.0.13:8080
+      - ENCRYPT_KEY=qwertyuiopas
+    networks:
+      cloud:
+        ipv4_address: 192.168.0.19
 
 networks:
   cloud:
