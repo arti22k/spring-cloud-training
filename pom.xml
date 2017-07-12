@@ -17,6 +17,7 @@
         <module>configuration</module>
         <module>gateway</module>
         <module>users</module>
+        <module>zipkin</module>
     </modules>
 
     <properties>
