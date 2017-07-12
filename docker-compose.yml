@@ -108,6 +108,15 @@ services:
       cloud:
         ipv4_address: 192.168.0.19
 
+  kafka:
+    image: spotify/kafka
+    ports:
+      - "2181:2181"
+      - "9092:9092"
+    networks:
+      cloud:
+        ipv4_address: 192.168.0.20
+
 networks:
   cloud:
     driver: bridge

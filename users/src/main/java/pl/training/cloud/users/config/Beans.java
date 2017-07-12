@@ -3,6 +3,8 @@ package pl.training.cloud.users.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +15,9 @@ import pl.training.cloud.users.repository.AuthoritiesRepository;
 import pl.training.cloud.users.repository.UsersRepository;
 import pl.training.cloud.users.service.OrganizationServiceClient;
 import pl.training.cloud.users.service.UsersService;
+import pl.training.cloud.users.stream.EventEmitter;
 
+@EnableBinding(Source.class)
 @ComponentScan(basePackages = "pl.training.cloud.common.config")
 @Configuration
 public class Beans {
@@ -46,6 +50,11 @@ public class Beans {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new StandardPasswordEncoder();
+    }
+
+    @Bean
+    public EventEmitter eventEmitter(Source source) {
+        return new EventEmitter(source);
     }
 
 }

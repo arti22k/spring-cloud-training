@@ -8,21 +8,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.training.cloud.common.Mapper;
 import pl.training.cloud.common.controller.UriBuilder;
-import pl.training.cloud.users.dto.DepartmentDto;
-import pl.training.cloud.users.dto.DepartmentsListDto;
-import pl.training.cloud.users.dto.UserDto;
-import pl.training.cloud.users.dto.UsersPageDto;
+import pl.training.cloud.users.dto.*;
 import pl.training.cloud.users.entity.User;
 import pl.training.cloud.users.repository.ResultPage;
 import pl.training.cloud.users.service.OrganizationServiceClient;
 import pl.training.cloud.users.service.OrganizationServiceFeignClient;
 import pl.training.cloud.users.service.UsersService;
+import pl.training.cloud.users.stream.EventEmitter;
+import pl.training.cloud.users.stream.Message;
 
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.created;
+import static org.springframework.http.ResponseEntity.ok;
 
 @Api(description = "Users resource")
 @RequestMapping(value = "users")
@@ -33,14 +33,17 @@ public class UsersController {
     private UsersService usersService;
     private OrganizationServiceClient organizationServiceClient;
     private OrganizationServiceFeignClient organizationServiceFeignClient;
+    private EventEmitter eventEmitter;
     private UriBuilder uriBuilder = new UriBuilder();
 
     @Autowired
-    public UsersController(Mapper mapper, UsersService usersService, OrganizationServiceClient organizationServiceClient, OrganizationServiceFeignClient organizationServiceFeignClient) {
+    public UsersController(Mapper mapper, UsersService usersService, OrganizationServiceClient organizationServiceClient,
+                           OrganizationServiceFeignClient organizationServiceFeignClient, EventEmitter eventEmitter) {
         this.mapper = mapper;
         this.usersService = usersService;
         this.organizationServiceClient = organizationServiceClient;
         this.organizationServiceFeignClient = organizationServiceFeignClient;
+        this.eventEmitter = eventEmitter;
     }
 
     @ApiOperation(value = "Create new user")
@@ -71,6 +74,14 @@ public class UsersController {
         ResultPage<User> resultPage = usersService.getUsers(pageNumber, pageSize);
         List<UserDto> usersDtos = mapper.map(resultPage.getContent(), UserDto.class);
         return new UsersPageDto(usersDtos, resultPage.getPageNumber(), resultPage.getTotalPages());
+    }
+
+    @ApiOperation(value = "Send new Message")
+    @RequestMapping(method = RequestMethod.POST, value = "messages")
+    public ResponseEntity sendMessage(@RequestBody  MessageDto messageDto) {
+        Message message = mapper.map(messageDto, Message.class);
+        eventEmitter.emit(message);
+        return ok().build();
     }
 
 }
