@@ -4,4 +4,4 @@ RUN mkdir -p /usr/local/service
 ADD ./target/users.jar /usr/local/service/
 ADD run.sh run.sh
 RUN chmod +x run.sh
-CMD ./run.sh
+CMD /bin/sh run.sh
