@@ -11,7 +11,7 @@ services:
         ipv4_address: 192.168.0.14
 
   configuration:
-    image: cloud/configuration:1.0-SNAPSHOT
+    image: cloud/configuration
     restart: always
     environment:
       - RABBITMQ_HOST=192.168.0.14
@@ -23,7 +23,7 @@ services:
         ipv4_address: 192.168.0.13
 
   discovery:
-    image: cloud/discovery:1.0-SNAPSHOT
+    image: cloud/discovery
     restart: always
     ports:
       - "8012:8080"
@@ -34,7 +34,7 @@ services:
         ipv4_address: 192.168.0.12
 
   gateway:
-    image: cloud/gateway:1.0-SNAPSHOT
+    image: cloud/gateway
     restart: always
     ports:
       - "8010:8080"
@@ -59,7 +59,7 @@ services:
         ipv4_address: 192.168.0.16
 
   users:
-    image: cloud/users:1.0-SNAPSHOT
+    image: cloud/users
     restart: always
     environment:
       - ZONE_URI=http://192.168.0.12:8080/eureka/
@@ -88,7 +88,7 @@ services:
         ipv4_address: 192.168.0.18
 
   organization:
-    image: cloud/organization:1.0-SNAPSHOT
+    image: cloud/organization
     restart: always
     environment:
       - ZONE_URI=http://192.168.0.12:8080/eureka/
@@ -100,7 +100,7 @@ services:
         ipv4_address: 192.168.0.17
 
   organization2:
-    image: cloud/organization:1.0-SNAPSHOT
+    image: cloud/organization
     restart: always
     environment:
       - ZONE_URI=http://192.168.0.12:8080/eureka/
