@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
-import pl.training.cloud.common.feign.OAuth2FeignRequestInterceptor;
 
 @Configuration
 @ConditionalOnClass(Feign.class)
@@ -17,8 +16,8 @@ public class OAuth2FeignAutoConfiguration {
 
     @Bean
     @ConditionalOnBean(OAuth2ClientContext.class)
-    public RequestInterceptor oauth2FeignRequestInterceptor(OAuth2ClientContext oauth2ClientContext) {
-        return new OAuth2FeignRequestInterceptor(oauth2ClientContext);
+    public RequestInterceptor oauth2FeignRequestInterceptor() {
+        return new OAuth2FeignRequestInterceptor();
     }
 
 }

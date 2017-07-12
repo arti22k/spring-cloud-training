@@ -30,3 +30,5 @@ eureka:
       defaultZone: http://localhost:8001/eureka/
 signing:
   key: "345345fsdfsf5345"
+hystrix:
+  shareSecurityContext: true
