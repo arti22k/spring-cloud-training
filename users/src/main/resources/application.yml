@@ -16,10 +16,6 @@ spring:
         output:
           destination: messages
           content-type: application/json
-      kafka:
-        binder:
-          zkNodes: localhost
-          brokers: localhost
 server:
   port: 8011
 eureka:

@@ -68,6 +68,7 @@ services:
       - RABBITMQ_HOST=192.168.0.14
       - RABBITMQ_USERNAME=rabbitbus
       - RABBITMQ_PASSWORD=TbFpVQzneY2j
+      - KAFKA_HOST=192.168.0.20
     networks:
       cloud:
         ipv4_address: 192.168.0.15
@@ -93,6 +94,7 @@ services:
       - ZONE_URI=http://192.168.0.12:8080/eureka/
       - CONFIG_URI=http://192.168.0.13:8080
       - ENCRYPT_KEY=qwertyuiopas
+      - KAFKA_HOST=192.168.0.20
     networks:
       cloud:
         ipv4_address: 192.168.0.17
@@ -104,6 +106,7 @@ services:
       - ZONE_URI=http://192.168.0.12:8080/eureka/
       - CONFIG_URI=http://192.168.0.13:8080
       - ENCRYPT_KEY=qwertyuiopas
+      - KAFKA_HOST=192.168.0.20
     networks:
       cloud:
         ipv4_address: 192.168.0.19
@@ -113,6 +116,10 @@ services:
     ports:
       - "2181:2181"
       - "9092:9092"
+    environment:
+      - TOPICS=messages
+      - ADVERTISED_HOST=localhost # 192.168.0.20 for production
+      - ADVERTISED_PORT=9092
     networks:
       cloud:
         ipv4_address: 192.168.0.20

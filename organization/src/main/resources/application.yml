@@ -8,6 +8,13 @@ spring:
 ---
 spring:
   profiles: development
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: messages
+          content-type: application/json
+          group: training
 server:
   port: 8010
 eureka:

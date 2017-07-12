@@ -18,4 +18,7 @@ echo "*****************************************************"
 while ! `nc -z organization_database 5432`; do sleep 3; done
 echo ">>>>>>>>>>>> Database Server has started"
 
-java -jar -Dspring.cloud.config.uri=$CONFIG_URI /usr/local/service/organization.jar
+java -jar -Dcloud.stream.kafka.binder.zkNodes=$KAFKA_HOST -Dcloud.stream.kafka.binder.brokers=$KAFKA_HOST -Dspring.cloud.config.uri=$CONFIG_URI /usr/local/service/organization.
+
+
+
