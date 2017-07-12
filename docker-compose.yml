@@ -99,18 +99,6 @@ services:
       cloud:
         ipv4_address: 192.168.0.17
 
-  organization2:
-    image: cloud/organization
-    restart: always
-    environment:
-      - ZONE_URI=http://192.168.0.12:8080/eureka/
-      - CONFIG_URI=http://192.168.0.13:8080
-      - ENCRYPT_KEY=qwertyuiopas
-      - KAFKA_HOST=192.168.0.20
-    networks:
-      cloud:
-        ipv4_address: 192.168.0.19
-
   kafka:
     image: spotify/kafka
     ports:

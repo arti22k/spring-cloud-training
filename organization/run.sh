@@ -18,7 +18,13 @@ echo "*****************************************************"
 while ! `nc -z organization_database 5432`; do sleep 3; done
 echo ">>>>>>>>>>>> Database Server has started"
 
-java -jar -Dcloud.stream.kafka.binder.zkNodes=$KAFKA_HOST -Dcloud.stream.kafka.binder.brokers=$KAFKA_HOST -Dspring.cloud.config.uri=$CONFIG_URI /usr/local/service/organization.jar
+echo "***************************************************"
+echo "Waiting for the Kafka server to start on port 9092"
+echo "***************************************************"
+while ! `nc -z kafka 9092`; do sleep 3; done
+echo ">>>>>>>>>>>> Kafka server has started"
+
+java -jar -Dcloud.stream.bindings.kafka.binder.zkNodes=$KAFKA_HOST -Dcloud.stream.bindings.kafka.binder.brokers=$KAFKA_HOST -Dspring.cloud.config.uri=$CONFIG_URI /usr/local/service/organization.jar
 
 
 

@@ -24,4 +24,10 @@ echo "*****************************************************"
 while ! `nc -z rabbitmq 5672`; do sleep 3; done
 echo ">>>>>>>>>>>> RabbitMQ server has started"
 
-java -jar -Dcloud.stream.kafka.binder.zkNodes=$KAFKA_HOST -Dcloud.stream.kafka.binder.brokers=$KAFKA_HOST -Dspring.cloud.config.uri=$CONFIG_URI -Dspring.rabbitmq.host=$RABBITMQ_HOST -Dspring.rabbitmq.username=$RABBITMQ_USERNAME -Dspring.rabbitmq.password=$RABBITMQ_PASSWORD /usr/local/service/users.jar
+echo "***************************************************"
+echo "Waiting for the Kafka server to start on port 9092"
+echo "***************************************************"
+while ! `nc -z kafka 9092`; do sleep 3; done
+echo ">>>>>>>>>>>> Kafka server has started"
+
+java -jar -Dcloud.stream.bindings.kafka.binder.zkNodes=$KAFKA_HOST -Dcloud.stream.bindings.kafka.binder.brokers=$KAFKA_HOST -Dspring.cloud.config.uri=$CONFIG_URI -Dspring.rabbitmq.host=$RABBITMQ_HOST -Dspring.rabbitmq.username=$RABBITMQ_USERNAME -Dspring.rabbitmq.password=$RABBITMQ_PASSWORD /usr/local/service/users.jar
