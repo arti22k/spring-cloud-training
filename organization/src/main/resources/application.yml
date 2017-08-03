@@ -7,6 +7,7 @@ spring:
     username: platform
     password: platform
   jpa:
+    show-sql: true
     hibernate:
       ddl-auto: update
 
